@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "80:80"
+      - "${APP_PORT:-80}:80"
     volumes:
       - ./data:/code/data
     restart: always
