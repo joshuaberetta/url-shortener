@@ -1,0 +1,20 @@
+name: URL Shortener
+services:
+- name: web
+  image:
+    registry_type: DOCR
+    repository: url-shortener
+    tag: latest
+  dockerfile_path: Dockerfile
+  source_dir: /
+  http_port: 80
+  instance_count: 1
+  instance_size_slug: basic-xs
+  envs:
+  - key: SECRET_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "change_this_to_a_secure_random_string"
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    # Use a persistent path if mounting a volume, otherwise it's ephemeral
+    value: "sqlite:///./data/app.db"
